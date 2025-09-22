@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/patients")
+@RequestMapping("/patients")
 public class PatientController
 {
     @Autowired
@@ -23,7 +23,23 @@ public class PatientController
         return patient;
     }
 
-    
+    @PostMapping
+    public ResponseEntity<Patient> addPatient(@RequestBody Patient patient){
+        Patient patient1 = patientService.addPatient(patient);
+        if(patient1 != null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(patient1);
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Patient> getPatientById(@RequestParam Long patientId){
+        return ResponseEntity.ok(patientService.getPatientById(patientId));
+    }
+
+
+
 
     @DeleteMapping
     public ResponseEntity<?> deletePatientById(@RequestParam long patientId){

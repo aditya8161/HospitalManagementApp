@@ -1,0 +1,12 @@
+#spring:
+#  security:
+#    user:
+#      name: aditya
+#      password: pass
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security : debug
